@@ -122,7 +122,7 @@
     NSUInteger itemCount = [self sectionAtIndex:section].numberOfItems;
     
     [self insertItems:items
-            atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(itemCount, [items count])]
+            atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(itemCount, items.count)]
             inSection:section];
 }
 

@@ -282,7 +282,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
             frame.size.height -= CGRectGetHeight(tableView.tableHeaderView.frame);
         }
         
-        [self.emptyView setFrame:frame];
+        (self.emptyView).frame = frame;
         self.emptyView.autoresizingMask = targetView.autoresizingMask;
     }
     

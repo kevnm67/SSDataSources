@@ -101,7 +101,7 @@ static void *SSArrayKeyPathDataSourceContext = &SSArrayKeyPathDataSourceContext;
 }
 
 - (NSUInteger)numberOfItemsInSection:(NSInteger)section {
-    return [self.items count];
+    return (self.items).count;
 }
 
 - (id)itemAtIndexPath:(NSIndexPath *)indexPath {
@@ -109,7 +109,7 @@ static void *SSArrayKeyPathDataSourceContext = &SSArrayKeyPathDataSourceContext;
         return nil;
     }
   
-    if (indexPath.row < (NSInteger)[self.items count]) {
+    if (indexPath.row < (NSInteger)(self.items).count) {
         return self.items[(NSUInteger)indexPath.row];
     }
   
@@ -149,7 +149,7 @@ static void *SSArrayKeyPathDataSourceContext = &SSArrayKeyPathDataSourceContext;
 - (void)appendItems:(NSArray *)newItems {
     [self insertItems:newItems
             atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange([self numberOfItems],
-                                                                         [newItems count])]];
+                                                                         newItems.count)]];
 }
 
 - (void)insertItem:(id)item atIndex:(NSUInteger)index {
@@ -158,7 +158,7 @@ static void *SSArrayKeyPathDataSourceContext = &SSArrayKeyPathDataSourceContext;
 }
 
 - (void)insertItems:(NSArray *)newItems atIndexes:(NSIndexSet *)indexes {
-    if ([newItems count] == 0 || [newItems count] != [indexes count]) {
+    if (newItems.count == 0 || newItems.count != indexes.count) {
         return;
     }
     
@@ -221,7 +221,7 @@ static void *SSArrayKeyPathDataSourceContext = &SSArrayKeyPathDataSourceContext;
     NSUInteger row = [self.items indexOfObjectPassingTest:^BOOL(NSManagedObject *object,
                                                                 NSUInteger index,
                                                                 BOOL *stop) {
-        return [[object objectID] isEqual:itemId];
+        return [object.objectID isEqual:itemId];
     }];
   
     if (row == NSNotFound) {

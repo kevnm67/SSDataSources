@@ -55,7 +55,7 @@
 /**
  * Return the number of items in this section.
  */
-- (NSUInteger) numberOfItems;
+@property (NS_NONATOMIC_IOSONLY, readonly) NSUInteger numberOfItems;
 
 /**
  * Return the item at a particular index.

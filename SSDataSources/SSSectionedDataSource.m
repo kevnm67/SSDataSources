@@ -30,7 +30,7 @@
 
 - (instancetype)initWithItems:(NSArray *)items {
     if ((self = [self init])) {
-        if ([items count] > 0) {
+        if (items.count > 0) {
             [self appendSection:[SSSection sectionWithItems:items]];
         }
     }
@@ -50,10 +50,10 @@
 
 - (instancetype)initWithSections:(NSArray *)newSections {
     if ((self = [self init])) {
-        if ([newSections count] > 0) {
+        if (newSections.count > 0) {
             [self insertSections:newSections
                        atIndexes:[NSIndexSet indexSetWithIndexesInRange:
-                                  NSMakeRange(0, [newSections count])]];
+                                  NSMakeRange(0, newSections.count)]];
         }
     }
     
@@ -63,7 +63,7 @@
 #pragma mark - SSBaseDataSource
 
 - (NSUInteger)numberOfSections {
-    return [self.sections count];
+    return (self.sections).count;
 }
 
 - (NSUInteger)numberOfItemsInSection:(NSInteger)section {
@@ -189,7 +189,7 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
     [[self sectionAtIndex:section].items addObjectsFromArray:items];
     
     [self insertCellsAtIndexPaths:[self.class indexPathArrayWithRange:NSMakeRange(sectionCount,
-                                                                                  [items count])
+                                                                                  items.count)
                                                             inSection:section]];
 }
 

@@ -72,12 +72,12 @@
 #pragma mark - SSBaseDataSource
 
 - (NSUInteger)numberOfSections {
-    return (NSUInteger)[[self.controller sections] count];
+    return (NSUInteger)(self.controller).sections.count;
 }
 
 - (NSUInteger)numberOfItemsInSection:(NSInteger)section {
-    id <NSFetchedResultsSectionInfo> sectionInfo = [self.controller sections][(NSUInteger)section];
-    return (NSUInteger)[sectionInfo numberOfObjects];
+    id <NSFetchedResultsSectionInfo> sectionInfo = (self.controller).sections[(NSUInteger)section];
+    return (NSUInteger)sectionInfo.numberOfObjects;
 }
 
 - (id)itemAtIndexPath:(NSIndexPath *)indexPath {
@@ -88,12 +88,12 @@
 
 - (NSIndexPath *)indexPathForItemWithId:(NSManagedObjectID *)objectId {
     for (NSUInteger section = 0; section < [self numberOfSections]; section++) {
-        id <NSFetchedResultsSectionInfo> sec = [self.controller sections][section];
+        id <NSFetchedResultsSectionInfo> sec = (self.controller).sections[section];
         
-        NSUInteger index = [[sec objects] indexOfObjectPassingTest:^BOOL(NSManagedObject *object,
+        NSUInteger index = [sec.objects indexOfObjectPassingTest:^BOOL(NSManagedObject *object,
                                                                          NSUInteger idx,
                                                                          BOOL *stop) {
-            return [[object objectID] isEqual:objectId];
+            return [object.objectID isEqual:objectId];
         }];
     
         if (index != NSNotFound) {
@@ -112,12 +112,12 @@
 }
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
-    return [self.controller sectionIndexTitles];
+    return (self.controller).sectionIndexTitles;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    id <NSFetchedResultsSectionInfo> sectionInfo = [self.controller sections][(NSUInteger)section];
-    return [sectionInfo name];
+    id <NSFetchedResultsSectionInfo> sectionInfo = (self.controller).sections[(NSUInteger)section];
+    return sectionInfo.name;
 }
 
 - (void)tableView:(UITableView *)tableView
@@ -215,11 +215,11 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
     
     if (collectionView) {
         
-        if ([self.sectionUpdates count] > 0) {
+        if ((self.sectionUpdates).count > 0) {
             [collectionView performBatchUpdates:^{
                 for (NSDictionary *change in self.sectionUpdates) {
                     [change enumerateKeysAndObjectsUsingBlock:^(NSNumber *key, id secnum, BOOL *stop) {
-                        NSFetchedResultsChangeType type = (NSFetchedResultsChangeType)[key unsignedIntegerValue];
+                        NSFetchedResultsChangeType type = (NSFetchedResultsChangeType)key.unsignedIntegerValue;
                         NSIndexSet *section = [NSIndexSet indexSetWithIndex:[secnum unsignedIntegerValue]];
                         
                         switch( type ) {
@@ -244,11 +244,11 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
                 // Hackish; force recalculation of empty view state
                 self.emptyView = self.emptyView;
             }];
-        } else if ([self.objectUpdates count] > 0) {
+        } else if ((self.objectUpdates).count > 0) {
             [collectionView performBatchUpdates:^{
                 for (NSDictionary *change in self.objectUpdates) {
                     [change enumerateKeysAndObjectsUsingBlock:^(NSNumber *key, id indexPath, BOOL *stop) {
-                        NSFetchedResultsChangeType type = [key unsignedIntegerValue];
+                        NSFetchedResultsChangeType type = key.unsignedIntegerValue;
                         
                         switch( type ) {
                             case NSFetchedResultsChangeInsert:

@@ -79,7 +79,7 @@
 }
 
 - (NSUInteger)numberOfItems {
-    return [self.items count];
+    return (self.items).count;
 }
 
 - (id)itemAtIndex:(NSUInteger)index {
