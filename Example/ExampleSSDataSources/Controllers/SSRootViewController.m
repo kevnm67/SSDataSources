@@ -45,7 +45,7 @@ typedef NS_ENUM( NSUInteger, SSDataSourcesExample ) {
                                                NSIndexPath *indexPath) {
             NSString *title;
             
-            switch( [exampleType unsignedIntegerValue] ) {
+            switch( exampleType.unsignedIntegerValue ) {
                 case SSDataSourcesExampleTable:
                     title =  NSLocalizedString(@"Table View", nil);
                     break;

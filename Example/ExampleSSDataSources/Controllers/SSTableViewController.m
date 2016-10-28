@@ -54,7 +54,7 @@
                                                NSNumber *number,
                                                UITableView *tableView,
                                                NSIndexPath *ip ) {
-            cell.textLabel.text = [number stringValue];
+            cell.textLabel.text = number.stringValue;
         };
         
         UILabel *noItemsLabel = [UILabel new];
@@ -82,7 +82,7 @@
 }
 
 - (void)toggleEditing {
-    [self.tableView setEditing:![self.tableView isEditing]
+    [self.tableView setEditing:!(self.tableView).editing
                       animated:YES];
     
     [self updateBarButtonItems];
@@ -95,7 +95,7 @@
          target:self
          action:@selector(addRow)],
         [[UIBarButtonItem alloc]
-         initWithBarButtonSystemItem:([self.tableView isEditing]
+         initWithBarButtonSystemItem:((self.tableView).editing
                                       ? UIBarButtonSystemItemDone
                                       : UIBarButtonSystemItemEdit)
          target:self

@@ -34,7 +34,7 @@
     }];
     
     tableView = [OCMockObject niceMockForClass:UITableView.class];
-    collectionView = [[UICollectionView alloc] initWithFrame:[[UIScreen mainScreen] bounds]
+    collectionView = [[UICollectionView alloc] initWithFrame:[UIScreen mainScreen].bounds
                                         collectionViewLayout:[UICollectionViewFlowLayout new]];
     
     [collectionView registerClass:[SSBaseCollectionCell class]

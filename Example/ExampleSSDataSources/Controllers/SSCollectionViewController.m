@@ -44,7 +44,7 @@
                                                NSNumber *number,
                                                UICollectionView *collectionView,
                                                NSIndexPath *ip ) {
-            cell.label.text = [number stringValue];
+            cell.label.text = number.stringValue;
         };
         self.dataSource.collectionSupplementaryConfigureBlock = ^(SSCollectionViewSectionHeader *header,
                                                                   NSString *kind,
